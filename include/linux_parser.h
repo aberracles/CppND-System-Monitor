@@ -12,6 +12,7 @@ const std::string kCmdlineFilename{"/cmdline"};
 const std::string kCpuinfoFilename{"/cpuinfo"};
 const std::string kStatusFilename{"/status"};
 const std::string kStatFilename{"/stat"};
+const std::string kStatCommandline{"/cmdline"};
 const std::string kUptimeFilename{"/uptime"};
 const std::string kMeminfoFilename{"/meminfo"};
 const std::string kVersionFilename{"/version"};
@@ -27,6 +28,11 @@ int RunningProcesses();
 std::string OperatingSystem();
 std::string Kernel();
 
+// auxiliar
+std::string GetPropertyFromFile(std::string filePath, std::string propertyName);
+std::string GetPropertyFromFile(std::string filePath, unsigned long position);
+std::string StringReplace(std::string *input,char oldChar, char newChar);
+
 // CPU
 enum CPUStates {
   kUser_ = 0,
@@ -40,6 +46,8 @@ enum CPUStates {
   kGuest_,
   kGuestNice_
 };
+
+float CpuUtilization(int pid);
 std::vector<std::string> CpuUtilization();
 long Jiffies();
 long ActiveJiffies();
@@ -52,6 +60,7 @@ std::string Ram(int pid);
 std::string Uid(int pid);
 std::string User(int pid);
 long int UpTime(int pid);
+
 };  // namespace LinuxParser
 
 #endif

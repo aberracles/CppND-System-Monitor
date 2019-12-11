@@ -11,11 +11,18 @@ using std::string;
 // INPUT: Long int measuring seconds
 // OUTPUT: HH:MM:SS
 string Format::ElapsedTime(long seconds) {
-  time_t tSeconds(seconds);
-  tm *time = gmtime(&tSeconds);
-  std::stringstream ss;
-  ss << std::setfill('0') << std::setw(2) << time->tm_hour << ":"
-     << std::setfill('0') << std::setw(2) << time->tm_min << ":"
-     << std::setfill('0') << std::setw(2) << time->tm_sec;
-  return ss.str();
+  try {
+    time_t tSeconds(seconds);
+    tm *time = gmtime(&tSeconds);
+    if (time == nullptr) {
+      return "00:00:00";
+    }
+    std::stringstream ss;
+    ss << std::setfill('0') << std::setw(2) << time->tm_hour << ":"
+       << std::setfill('0') << std::setw(2) << time->tm_min << ":"
+       << std::setfill('0') << std::setw(2) << time->tm_sec;
+    return ss.str();
+  } catch (...) {
+    return "00:00:00";
+  }
 }

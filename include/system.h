@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+
 #include "process.h"
 #include "processor.h"
 
@@ -22,6 +23,9 @@ class System {
  private:
   Processor cpu_ = {};
   std::vector<Process> processes_ = {};
+  void UpdateProcess(int pid);
+  void UpdateProcesses();
+
 };
 
 #endif
